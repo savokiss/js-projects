@@ -5,10 +5,16 @@
 	<title>savokis grid</title>
 	<style>
 		.grid{
-			width: 50px;
-			height: 50px;
+			flex: auto;
 			border: 1px solid #ccc;
-			display: inline-block;
+		}
+		.grid-container{
+
+		}
+		.grid-row{
+			display: -webkit-flex;
+			display: flex;
+			justify-content: center;
 		}
 	</style>
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -28,21 +34,20 @@
          * @param zoneId 放置的容器id
          */
 		function genGrid(n, $grid, zoneId){
-			var $container = $('<div class="gridContainer"></div>');
+			var $container = $('<div class="grid-container"></div>');
+			var $gridRow = $('<div class="grid-row"></div>');
 			for(var i=0;i<n;i++){
+				var $row = $gridRow.clone();
 				for(var j=0;j<n;j++){
-					var dom = $grid.clone();
+					var $grid = $grid.clone();
 					var num = j+i*n+1;
-					dom.html(num);
-					!function(num){
-						dom.click(function(){
-							console.log(num);
-						});
-					}(num);
-					
-					$container.append(dom);
+					$grid.html(num);
+					$grid.click(function(){
+						console.log($(this).html());
+					});
+					$row.append($grid);
 				}
-				$container.append('<br>');
+				$container.append($row);
 			}
 			$(zoneId).empty();
 			$(zoneId).append($container);
