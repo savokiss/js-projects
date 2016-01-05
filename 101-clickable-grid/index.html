@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>savokis grid</title>
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<style>
 		.grid{
 			width: 50px;
@@ -12,15 +11,22 @@
 			display: inline-block;
 		}
 	</style>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script>
 		$(function(){
 			$('.confirmZone button').click(function(){
 				var n = $('.confirmZone input').val();
-				var dom = genGrid(n, $('<div class="grid"></div>'), '.placeZone');
+				genGrid(n, $('<div class="grid"></div>'), '.placeZone');
 			});
 		});
 
+		/**
+		 * 生成grid
+		 * @param n
+		 * @param $grid grid的dom
+         * @param zoneId 放置的容器id
+         */
 		function genGrid(n, $grid, zoneId){
 			var $container = $('<div class="gridContainer"></div>');
 			for(var i=0;i<n;i++){
